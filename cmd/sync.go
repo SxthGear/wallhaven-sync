@@ -175,15 +175,16 @@ func syncForCollection(collectionID int, username string, apiKey string, files m
 	}
 
 	// remove pictures that are not in the collection anymore
-	for fileName, hasBeenFoundInSync := range files {
-		if !hasBeenFoundInSync {
-			log.Printf("Deleting file %s",fileName)
-			err := os.Remove(folder + "/" + fileName)
-			if err != nil {
-				return syncResult, err
-			}
-			syncResult.DeletedPicturesCount++
-		}
-	}
+	// Not a fan of this as it'll delete anything in the folder that doesn't match the most recent sync.
+//	for fileName, hasBeenFoundInSync := range files {
+//		if !hasBeenFoundInSync {
+//			log.Printf("Deleting file %s",fileName)
+//			err := os.Remove(folder + "/" + fileName)
+//			if err != nil {
+//				return syncResult, err
+//			}
+//			syncResult.DeletedPicturesCount++
+//		}
+//	}
 	return syncResult, nil
 }
